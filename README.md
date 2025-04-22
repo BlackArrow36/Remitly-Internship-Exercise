@@ -32,7 +32,7 @@ A RESTful API built with Go and Gin that allows users to manage SWIFT codes. It 
 - Create database swiftdb
 - create table swift-codes
   
-CREATE TABLE swift_codes (
+<pre>CREATE TABLE swift_codes (
     id SERIAL PRIMARY KEY,
     swift_code VARCHAR NOT NULL,
     bank_name TEXT NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE swift_codes (
     city TEXT,
     address TEXT,
     time_zone TEXT
-);
+);</pre>
 
 ### Installation
 
@@ -70,7 +70,7 @@ Successful Response:
 
 {
   "message": "SWIFT codes imported successfully!"
-}
+}</pre>
 
 Error Responses:
 
@@ -78,25 +78,25 @@ Error Responses:
 
 {
   "error": "Missing 'file' query parameter"
-}
+}</pre>
 
 -Invalid file type:
 
 {
   "error": "Only .csv files are allowed"
-}
+}</pre>
 
 -CSV parsing or database insertion failure:
 
 {
   "error": "Failed to parse CSV",
   "details": "detailed error message here"
-}
+}</pre>
 
 {
   "error": "Failed to insert SWIFT codes",
   "details": "detailed error message here"
-}
+}</pre>
 
 Endpoint 1: Retrieve SWIFT Code Details
 
@@ -106,7 +106,7 @@ Returns information about a specific SWIFT code, whether it's a headquarter or a
 
 Response for a Headquarter SWIFT Code:
 
-<pre> ```json {
+<pre>{
   "address": "string",
   "bankName": "string",
   "countryISO2": "string",
@@ -123,18 +123,18 @@ Response for a Headquarter SWIFT Code:
     }
     // ... more branches
   ]
-}``` </pre>
+}</pre>
 
 Response for a Branch SWIFT Code:
 
-{
+<pre>{
   "address": "string",
   "bankName": "string",
   "countryISO2": "string",
   "countryName": "string",
   "isHeadquarter": false,
   "swiftCode": "string"
-}
+}</pre>
 
 Endpoint 2: Get All SWIFT Codes for a Country
 
@@ -144,7 +144,7 @@ Returns all SWIFT codes (both headquarters and branches) for the given 2-letter 
 
 Response:
 
-{
+<pre>{
   "countryISO2": "string",
   "countryName": "string",
   "swiftCodes": [
@@ -164,7 +164,7 @@ Response:
     }
     // ... more SWIFT codes
   ]
-}
+}</pre>
 
 Endpoint 3: Add a New SWIFT Code
 
@@ -174,14 +174,14 @@ Adds a new SWIFT code entry to the database.
 
 Request:
 
-{
+<pre>{
   "address": "string",
   "bankName": "string",
   "countryISO2": "string",
   "countryName": "string",
   "isHeadquarter": true,
   "swiftCode": "string"
-}
+}</pre>
 
 Response:
 
