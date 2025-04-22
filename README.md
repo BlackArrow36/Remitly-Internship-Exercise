@@ -68,7 +68,7 @@ The file must be placed in the local import/ directory.
 Parses and inserts all SWIFT code entries from the file into the database.
 Successful Response:
 
-{
+<pre>{
   "message": "SWIFT codes imported successfully!"
 }</pre>
 
@@ -76,24 +76,24 @@ Error Responses:
 
 -Missing query parameter:
 
-{
+<pre>{
   "error": "Missing 'file' query parameter"
 }</pre>
 
 -Invalid file type:
 
-{
+<pre>{
   "error": "Only .csv files are allowed"
 }</pre>
 
 -CSV parsing or database insertion failure:
 
-{
+<pre>{
   "error": "Failed to parse CSV",
   "details": "detailed error message here"
 }</pre>
 
-{
+<pre>{
   "error": "Failed to insert SWIFT codes",
   "details": "detailed error message here"
 }</pre>
@@ -185,9 +185,9 @@ Request:
 
 Response:
 
-{
+<pre>{
   "message": "string"
-}
+}</pre>
 
 Endpoint 4: Delete a SWIFT Code
 
@@ -197,9 +197,9 @@ Deletes the SWIFT code from the database if it exists.
 
 Response:
 
-{
+<pre>{
   "message": "string"
-}
+}</pre>
 
 ### USE EXAMPLES USING curl
 
