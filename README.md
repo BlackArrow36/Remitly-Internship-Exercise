@@ -59,41 +59,53 @@ CREATE TABLE swift_codes (
    go run main.go
 ### API ENDPOINTS
 Endpoint 0: Import SWIFT Codes from CSV
+
 POST /v1/import-swift?file={filename}.csv
+
 Imports a batch of SWIFT codes from a CSV file located in the server's import/ directory.
 Accepts a .csv filename via the file query parameter.
 The file must be placed in the local import/ directory.
 Parses and inserts all SWIFT code entries from the file into the database.
 Successful Response:
+
 {
   "message": "SWIFT codes imported successfully!"
 }
+
 Error Responses:
+
 -Missing query parameter:
+
 {
   "error": "Missing 'file' query parameter"
 }
 
 -Invalid file type:
+
 {
   "error": "Only .csv files are allowed"
 }
 
 -CSV parsing or database insertion failure:
+
 {
   "error": "Failed to parse CSV",
   "details": "detailed error message here"
 }
+
 {
   "error": "Failed to insert SWIFT codes",
   "details": "detailed error message here"
 }
 
-
 Endpoint 1: Retrieve SWIFT Code Details
+
 GET /v1/swift-codes/{swift-code}
+
 Returns information about a specific SWIFT code, whether it's a headquarter or a branch.
+
 Response for a Headquarter SWIFT Code:
+
 {
   "address": "string",
   "bankName": "string",
@@ -112,7 +124,9 @@ Response for a Headquarter SWIFT Code:
     // ... more branches
   ]
 }
+
 Response for a Branch SWIFT Code:
+
 {
   "address": "string",
   "bankName": "string",
@@ -123,9 +137,13 @@ Response for a Branch SWIFT Code:
 }
 
 Endpoint 2: Get All SWIFT Codes for a Country
+
 GET /v1/swift-codes/country/{countryISO2code}
+
 Returns all SWIFT codes (both headquarters and branches) for the given 2-letter country code.
+
 Response:
+
 {
   "countryISO2": "string",
   "countryName": "string",
@@ -149,9 +167,13 @@ Response:
 }
 
 Endpoint 3: Add a New SWIFT Code
+
 POST /v1/swift-codes
+
 Adds a new SWIFT code entry to the database.
+
 Request:
+
 {
   "address": "string",
   "bankName": "string",
@@ -160,41 +182,61 @@ Request:
   "isHeadquarter": true,
   "swiftCode": "string"
 }
+
 Response:
+
 {
   "message": "string"
 }
 
 Endpoint 4: Delete a SWIFT Code
+
 DELETE /v1/swift-codes/{swift-code}
+
 Deletes the SWIFT code from the database if it exists.
+
 Response:
+
 {
   "message": "string"
 }
 
 ### USE EXAMPLES USING curl
+
 Start with importing 
+
 ENDPOINT 0 IMPORT (change example.csv to the name of the file you inserted in import folder)
+
 curl -X POST "http://localhost:8080/v1/import-swift?file=example.csv"
 
 ENDPOINT 1 (change CODE for your swift-code)
+
 curl -X GET http://localhost:8080/v1/swift-codes/CODE
 
 headquarter without branches
+
 http://localhost:8080/v1/swift-codes/SUSRPLP1XXX
+
 headquarter with one branch
+
 http://localhost:8080/v1/swift-codes/UBPGMCMXXXX
+
 headquarter with many branches
+
 http://localhost:8080/v1/swift-codes/TPEOPLPWXXX
 
 ENDPOINT 2
+
 Working country code
+
 curl -X GET http://localhost:8080/v1/swift-codes/country/PL
+
 Not existing country code
+
 curl -X GET http://localhost:8080/v1/swift-codes/country/PLL
 
 ENDPOINT 3 (insert using curl)
+
 curl -X POST http://localhost:8080/v1/swift-codes -H "Content-Type: application/json" -d "{\"swiftCode\":\"TESTPLP1XXX\",\"bankName\":\"Test Bank\",\"address\":\"Test Address 1\",\"countryISO2\":\"PL\",\"countryName\":\"Poland\",\"isHeadquarter\":true}"
 
 ENDPOINT 4
