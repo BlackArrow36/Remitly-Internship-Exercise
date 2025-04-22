@@ -106,7 +106,7 @@ Returns information about a specific SWIFT code, whether it's a headquarter or a
 
 Response for a Headquarter SWIFT Code:
 
-{
+<pre> ```json {
   "address": "string",
   "bankName": "string",
   "countryISO2": "string",
@@ -123,7 +123,7 @@ Response for a Headquarter SWIFT Code:
     }
     // ... more branches
   ]
-}
+}``` </pre>
 
 Response for a Branch SWIFT Code:
 
